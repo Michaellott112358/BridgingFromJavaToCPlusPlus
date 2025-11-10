@@ -12,8 +12,6 @@ import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
-
-
 public class MenuStart extends Application {
 
     @Override
@@ -29,23 +27,29 @@ public class MenuStart extends Application {
         borderOuter.setLeft(new EmptyPane(0,75,0,75));
         borderOuter.setCenter(borderInner);
 
-        //create stack panes to hold text for inner region nodes
+        //stack pane holds label for welcome message
         StackPane innerTop = new StackPane();
+        Label innerTopLabel = new Label("Welcome to the Bridge App");
+        innerTopLabel.setFont(new Font("Ariel", 45));
+        innerTop.getChildren().add(innerTopLabel);
+
+        //stack pane holds label for description message
         StackPane innerCenter = new StackPane();
-        innerTop.getChildren().add(new Label("Welcome to the Bridge App"));
+        Label innerCenterLabel = new Label("This Quiz application is designed to help students with learning C++ through comparison of Java and C++");
+        innerCenterLabel.setFont(new Font("Ariel", 20));
+        innerCenter.getChildren().add(innerCenterLabel);
 
-        double test = borderInner.getMaxWidth();
-
-        System.out.println(test);
-
-        innerCenter.getChildren().add(new Label("This application does things"));
-
-        //create buttons
-        HBox buttonBox = new HBox();
+        //create buttons for quiz and lesson pages
+        HBox buttonBox = new HBox(50);
+        //buttonBox.
         Button buttonLessons = new Button("Lessons");
         Button buttonQuizzes = new Button("Quizzes");
 
-        //set border inner
+        buttonLessons.setPrefSize(200,100);
+        buttonQuizzes.setPrefSize(200,100);
+        //buttonQuizzes.setPrefWidth();
+
+        //set inner border regions to primary node elements
         borderInner.setTop(innerTop);
         borderInner.setCenter(innerCenter);
         borderInner.setBottom(buttonBox);
@@ -57,27 +61,15 @@ public class MenuStart extends Application {
 
         //construct scene
         Scene scene = new Scene(borderOuter);
+        stage.setMaximized(true);
         stage.setTitle("Bridging From Java to C++");
         stage.setScene(scene);
         stage.show();
     }
 }
-class OptionButton extends Button{
-    public OptionButton(String title){
-        getChildren().add(new Label(title));
-        setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    }
-}
 class EmptyPane extends StackPane{
     public EmptyPane(double top, double right, double bottom, double left){
-        setStyle("-fx-border-color: green");
+        //setStyle("-fx-border-color: green");
         setPadding(new Insets(top, right, bottom, left));
-    }
-}
-class ButtonPane extends StackPane{
-    public ButtonPane(String title){
-        getChildren().add(new Button(title));
-        setStyle("-fx-border-color: red");
-        //setPadding(new Insets(500, 25, 500, 25));
     }
 }
