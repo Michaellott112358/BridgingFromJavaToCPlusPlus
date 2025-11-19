@@ -14,6 +14,8 @@ import javafx.scene.layout.HBox;
 
 public class MenuStart extends Application {
 
+    Stage stage;
+
     @Override
     public void start(Stage stage){
         //create border panes to define outer and inner region
@@ -21,10 +23,10 @@ public class MenuStart extends Application {
         BorderPane borderInner = new BorderPane();
 
         //set border outer
-        borderOuter.setTop(new EmptyPane(100,75,100,75));
-        borderOuter.setRight(new EmptyPane(100,75,100,75));
-        borderOuter.setBottom(new EmptyPane(50,75,100,75));
-        borderOuter.setLeft(new EmptyPane(0,75,0,75));
+        borderOuter.setTop(new EmptyPane(100,75,100,75, false));
+        borderOuter.setRight(new EmptyPane(100,75,100,75, false));
+        borderOuter.setBottom(new EmptyPane(50,75,100,75, false));
+        borderOuter.setLeft(new EmptyPane(0,75,0,75, false));
         borderOuter.setCenter(borderInner);
 
         //stack pane holds label for welcome message
@@ -40,6 +42,7 @@ public class MenuStart extends Application {
         innerCenter.getChildren().add(innerCenterLabel);
 
         //create buttons for quiz and lesson pages
+        //TODO property binding
         HBox buttonBox = new HBox(50);
         //buttonBox.
         Button buttonLessons = new Button("Lessons");
@@ -47,7 +50,8 @@ public class MenuStart extends Application {
 
         buttonLessons.setPrefSize(200,100);
         buttonQuizzes.setPrefSize(200,100);
-        //buttonQuizzes.setPrefWidth();
+        //buttonBox.setPrefSize(250,250);
+        //buttonQuizzes.setPrefWidth(buttonBox.getWidth() / 2);
 
         //set inner border regions to primary node elements
         borderInner.setTop(innerTop);
@@ -68,8 +72,10 @@ public class MenuStart extends Application {
     }
 }
 class EmptyPane extends StackPane{
-    public EmptyPane(double top, double right, double bottom, double left){
-        //setStyle("-fx-border-color: green");
+    public EmptyPane(double top, double right, double bottom, double left, boolean color){
+        if(color){
+            setStyle("-fx-border-color: green");
+        }
         setPadding(new Insets(top, right, bottom, left));
     }
 }
